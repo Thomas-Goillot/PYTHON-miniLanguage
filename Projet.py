@@ -16,7 +16,7 @@ reserved = {
 }
 
 tokens = [
-    'NAME', 'NUMBER',
+    'NAME', 'NUMBER', 'STRING',
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE',
     'LPAREN', 'RPAREN', 'SEMICOLON', 'COMMA', 'AND', 'OR', 'EQUAL', 'EQUALS', 'LOWER', 'HIGHER'
 ]+list(reserved.values())
@@ -44,6 +44,7 @@ t_EQUALS = r'=='
 t_LOWER = r'\<'
 t_HIGHER = r'\>'
 t_COMMA = r','
+t_ignore = " \t\t"
 
 
 def t_NUMBER(t):
@@ -55,15 +56,14 @@ def t_NUMBER(t):
         t.value = 0
     return t
 
-
-# Ignored characters
-t_ignore = " \t\t"
-
+def t_STRING(t):
+    r'\"([^\\\n]|(\\.))*?\"'
+    t.value = t.value[1:-1]
+    return t
 
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
-
 
 def t_error(t):
     print("\t\tIllegal character '%s'" % t.value[0])
@@ -72,7 +72,6 @@ def t_error(t):
 
 # Build the lexer
 lexer = lex.lex()
-
 
 # Parsing rules
 
@@ -138,13 +137,18 @@ def evalInst(t):
         evalInst(instructions)
         for i in range(len(params)):
             del variables[paramsFunction[i]]
-    if value == 'print':
-        # handle multiple params
+    if t[0] == 'print':
         if type(t[1]) == list:
             for param in t[1]:
-                print('CONSOLE>', evalExpr(param))
+                if type(param) == str:  # Check if it's a string
+                    print('CONSOLE>', param)
+                else:
+                    print('CONSOLE>', evalExpr(param))
         else:
-            print('CONSOLE>', evalExpr(t[1]))
+            if type(t[1]) == str:  # Check if it's a string
+                print('CONSOLE>', t[1])
+            else:
+                print('CONSOLE>', evalExpr(t[1]))
     if value == 'assign':
         variables[t[1]] = evalExpr(t[2])
     if value == 'bloc':
@@ -228,6 +232,10 @@ def p_expression_number(t):
 
 def p_expression_name(t):
     'expression : NAME'
+    t[0] = t[1]
+
+def p_expression_string(t):
+    'expression : STRING'
     t[0] = t[1]
 
 

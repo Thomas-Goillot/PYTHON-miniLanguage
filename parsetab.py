@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND COMMA DIVIDE DO ELSE END EQUAL EQUALS FOR FUNCTION HIGHER IF LOWER LPAREN MINUS NAME NUMBER OR PLUS PRINT RPAREN SEMICOLON THEN TIMES WHILE start : linstlinst : linst inst \n            | inst expression : LPAREN expression RPARENexpression : NUMBERexpression : NAMEinst : NAME EQUAL expression SEMICOLONassign : NAME EQUAL expressioninst : NAME PLUS EQUAL NUMBER SEMICOLON\n            | NAME PLUS PLUS SEMICOLONinst : NAME MINUS EQUAL NUMBER SEMICOLON\n            | NAME MINUS MINUS SEMICOLONexpressions : expression COMMA expressions\n              | expressioninst : PRINT LPAREN params RPAREN SEMICOLON\n            | PRINT LPAREN expressions RPAREN SEMICOLONexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression OR expression\n                  | expression AND expression\n                  | expression EQUALS expression\n                  | expression LOWER expression\n                  | expression HIGHER expression\n                  | expression DIVIDE expressioninst : IF LPAREN expression RPAREN THEN inst \n            | IF LPAREN expression RPAREN THEN inst ELSE instinst : WHILE LPAREN expression RPAREN DO linst END SEMICOLONinst : FOR LPAREN assign SEMICOLON expression SEMICOLON assign RPAREN DO linst END SEMICOLONparams : NAME COMMA params\n              | NAMEinst : FUNCTION NAME LPAREN params RPAREN linst END SEMICOLON\n            | FUNCTION NAME LPAREN RPAREN linst END SEMICOLONinst : NAME LPAREN expressions RPAREN SEMICOLON\n            | NAME LPAREN params RPAREN SEMICOLON\n            | NAME LPAREN RPAREN SEMICOLON'
+_lr_signature = 'AND COMMA DIVIDE DO ELSE END EQUAL EQUALS FOR FUNCTION HIGHER IF LOWER LPAREN MINUS NAME NUMBER OR PLUS PRINT RPAREN SEMICOLON STRING THEN TIMES WHILE start : linstlinst : linst inst \n            | inst expression : LPAREN expression RPARENexpression : NUMBERexpression : NAMEexpression : STRINGinst : NAME EQUAL expression SEMICOLONassign : NAME EQUAL expressioninst : NAME PLUS EQUAL NUMBER SEMICOLON\n            | NAME PLUS PLUS SEMICOLONinst : NAME MINUS EQUAL NUMBER SEMICOLON\n            | NAME MINUS MINUS SEMICOLONexpressions : expression COMMA expressions\n              | expressioninst : PRINT LPAREN params RPAREN SEMICOLON\n            | PRINT LPAREN expressions RPAREN SEMICOLONexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression OR expression\n                  | expression AND expression\n                  | expression EQUALS expression\n                  | expression LOWER expression\n                  | expression HIGHER expression\n                  | expression DIVIDE expressioninst : IF LPAREN expression RPAREN THEN inst \n            | IF LPAREN expression RPAREN THEN inst ELSE instinst : WHILE LPAREN expression RPAREN DO linst END SEMICOLONinst : FOR LPAREN assign SEMICOLON expression SEMICOLON assign RPAREN DO linst END SEMICOLONparams : NAME COMMA params\n              | NAMEinst : FUNCTION NAME LPAREN params RPAREN linst END SEMICOLON\n            | FUNCTION NAME LPAREN RPAREN linst END SEMICOLONinst : NAME LPAREN expressions RPAREN SEMICOLON\n            | NAME LPAREN params RPAREN SEMICOLON\n            | NAME LPAREN RPAREN SEMICOLON'
     
-_lr_action_items = {'NAME':([0,2,3,9,10,11,14,15,16,17,18,22,39,40,41,42,43,44,45,46,47,48,49,51,53,55,57,59,64,65,68,79,80,82,83,85,86,87,88,91,92,93,94,95,96,98,102,103,104,106,107,108,110,],[4,4,-3,19,-2,20,28,28,20,20,38,20,66,-7,20,20,20,20,20,20,20,20,20,-10,-12,66,-36,20,20,20,4,-9,-11,-34,-35,-15,-16,4,4,4,4,-26,4,38,4,4,-33,-27,-28,-32,4,4,-29,]),'PRINT':([0,2,3,10,40,51,53,57,68,79,80,82,83,85,86,87,88,91,92,93,94,96,98,102,103,104,106,107,108,110,],[5,5,-3,-2,-7,-10,-12,-36,5,-9,-11,-34,-35,-15,-16,5,5,5,5,-26,5,5,5,-33,-27,-28,-32,5,5,-29,]),'IF':([0,2,3,10,40,51,53,57,68,79,80,82,83,85,86,87,88,91,92,93,94,96,98,102,103,104,106,107,108,110,],[6,6,-3,-2,-7,-10,-12,-36,6,-9,-11,-34,-35,-15,-16,6,6,6,6,-26,6,6,6,-33,-27,-28,-32,6,6,-29,]),'WHILE':([0,2,3,10,40,51,53,57,68,79,80,82,83,85,86,87,88,91,92,93,94,96,98,102,103,104,106,107,108,110,],[7,7,-3,-2,-7,-10,-12,-36,7,-9,-11,-34,-35,-15,-16,7,7,7,7,-26,7,7,7,-33,-27,-28,-32,7,7,-29,]),'FOR':([0,2,3,10,40,51,53,57,68,79,80,82,83,85,86,87,88,91,92,93,94,96,98,102,103,104,106,107,108,110,],[8,8,-3,-2,-7,-10,-12,-36,8,-9,-11,-34,-35,-15,-16,8,8,8,8,-26,8,8,8,-33,-27,-28,-32,8,8,-29,]),'FUNCTION':([0,2,3,10,40,51,53,57,68,79,80,82,83,85,86,87,88,91,92,93,94,96,98,102,103,104,106,107,108,110,],[9,9,-3,-2,-7,-10,-12,-36,9,-9,-11,-34,-35,-15,-16,9,9,9,9,-26,9,9,9,-33,-27,-28,-32,9,9,-29,]),'$end':([1,2,3,10,40,51,53,57,79,80,82,83,85,86,93,102,103,104,106,110,],[0,-1,-3,-2,-7,-10,-12,-36,-9,-11,-34,-35,-15,-16,-26,-33,-27,-28,-32,-29,]),'END':([3,10,40,51,53,57,79,80,82,83,85,86,92,93,94,96,102,103,104,106,108,110,],[-3,-2,-7,-10,-12,-36,-9,-11,-34,-35,-15,-16,97,-26,99,101,-33,-27,-28,-32,109,-29,]),'EQUAL':([4,12,13,38,],[11,25,27,65,]),'PLUS':([4,12,20,21,23,28,32,35,36,50,69,70,71,72,73,74,75,76,77,78,89,90,],[12,24,-6,41,-5,-6,41,41,41,41,41,41,41,41,41,41,41,41,41,-4,41,41,]),'MINUS':([4,13,20,21,23,28,32,35,36,50,69,70,71,72,73,74,75,76,77,78,89,90,],[13,26,-6,42,-5,-6,42,42,42,42,42,42,42,42,42,42,42,42,42,-4,42,42,]),'LPAREN':([4,5,6,7,8,11,14,15,16,17,19,22,41,42,43,44,45,46,47,48,49,59,64,65,],[14,15,16,17,18,22,22,22,22,22,39,22,22,22,22,22,22,22,22,22,22,22,22,22,]),'NUMBER':([11,14,15,16,17,22,25,27,41,42,43,44,45,46,47,48,49,59,64,65,],[23,23,23,23,23,23,52,54,23,23,23,23,23,23,23,23,23,23,23,23,]),'RPAREN':([14,20,23,28,29,31,32,33,34,35,36,39,50,66,67,69,70,71,72,73,74,75,76,77,78,81,84,90,100,],[30,-6,-5,-6,56,58,-14,60,61,62,63,68,78,-31,91,-17,-18,-19,-20,-21,-22,-23,-24,-25,-4,-30,-13,-8,105,]),'SEMICOLON':([20,21,23,24,26,30,37,52,54,56,58,60,61,69,70,71,72,73,74,75,76,77,78,89,90,97,99,101,109,],[-6,40,-5,51,53,57,64,79,80,82,83,85,86,-17,-18,-19,-20,-21,-22,-23,-24,-25,-4,95,-8,102,104,106,110,]),'TIMES':([20,21,23,28,32,35,36,50,69,70,71,72,73,74,75,76,77,78,89,90,],[-6,43,-5,-6,43,43,43,43,43,43,43,43,43,43,43,43,43,-4,43,43,]),'OR':([20,21,23,28,32,35,36,50,69,70,71,72,73,74,75,76,77,78,89,90,],[-6,44,-5,-6,44,44,44,44,44,44,44,44,44,44,44,44,44,-4,44,44,]),'AND':([20,21,23,28,32,35,36,50,69,70,71,72,73,74,75,76,77,78,89,90,],[-6,45,-5,-6,45,45,45,45,45,45,45,45,45,45,45,45,45,-4,45,45,]),'EQUALS':([20,21,23,28,32,35,36,50,69,70,71,72,73,74,75,76,77,78,89,90,],[-6,46,-5,-6,46,46,46,46,46,46,46,46,46,46,46,46,46,-4,46,46,]),'LOWER':([20,21,23,28,32,35,36,50,69,70,71,72,73,74,75,76,77,78,89,90,],[-6,47,-5,-6,47,47,47,47,47,47,47,47,47,47,47,47,47,-4,47,47,]),'HIGHER':([20,21,23,28,32,35,36,50,69,70,71,72,73,74,75,76,77,78,89,90,],[-6,48,-5,-6,48,48,48,48,48,48,48,48,48,48,48,48,48,-4,48,48,]),'DIVIDE':([20,21,23,28,32,35,36,50,69,70,71,72,73,74,75,76,77,78,89,90,],[-6,49,-5,-6,49,49,49,49,49,49,49,49,49,49,49,49,49,-4,49,49,]),'COMMA':([20,23,28,32,66,69,70,71,72,73,74,75,76,77,78,],[-6,-5,55,59,55,-17,-18,-19,-20,-21,-22,-23,-24,-25,-4,]),'ELSE':([40,51,53,57,79,80,82,83,85,86,93,102,103,104,106,110,],[-7,-10,-12,-36,-9,-11,-34,-35,-15,-16,98,-33,-27,-28,-32,-29,]),'THEN':([62,],[87,]),'DO':([63,105,],[88,107,]),}
+_lr_action_items = {'NAME':([0,2,3,9,10,11,14,15,16,17,18,22,40,41,42,43,44,45,46,47,48,49,50,52,54,56,58,60,65,66,69,80,81,83,84,86,87,88,89,92,93,94,95,96,97,99,103,104,105,107,108,109,111,],[4,4,-3,19,-2,20,29,29,20,20,39,20,67,-8,20,20,20,20,20,20,20,20,20,-11,-13,67,-37,20,20,20,4,-10,-12,-35,-36,-16,-17,4,4,4,4,-27,4,39,4,4,-34,-28,-29,-33,4,4,-30,]),'PRINT':([0,2,3,10,41,52,54,58,69,80,81,83,84,86,87,88,89,92,93,94,95,97,99,103,104,105,107,108,109,111,],[5,5,-3,-2,-8,-11,-13,-37,5,-10,-12,-35,-36,-16,-17,5,5,5,5,-27,5,5,5,-34,-28,-29,-33,5,5,-30,]),'IF':([0,2,3,10,41,52,54,58,69,80,81,83,84,86,87,88,89,92,93,94,95,97,99,103,104,105,107,108,109,111,],[6,6,-3,-2,-8,-11,-13,-37,6,-10,-12,-35,-36,-16,-17,6,6,6,6,-27,6,6,6,-34,-28,-29,-33,6,6,-30,]),'WHILE':([0,2,3,10,41,52,54,58,69,80,81,83,84,86,87,88,89,92,93,94,95,97,99,103,104,105,107,108,109,111,],[7,7,-3,-2,-8,-11,-13,-37,7,-10,-12,-35,-36,-16,-17,7,7,7,7,-27,7,7,7,-34,-28,-29,-33,7,7,-30,]),'FOR':([0,2,3,10,41,52,54,58,69,80,81,83,84,86,87,88,89,92,93,94,95,97,99,103,104,105,107,108,109,111,],[8,8,-3,-2,-8,-11,-13,-37,8,-10,-12,-35,-36,-16,-17,8,8,8,8,-27,8,8,8,-34,-28,-29,-33,8,8,-30,]),'FUNCTION':([0,2,3,10,41,52,54,58,69,80,81,83,84,86,87,88,89,92,93,94,95,97,99,103,104,105,107,108,109,111,],[9,9,-3,-2,-8,-11,-13,-37,9,-10,-12,-35,-36,-16,-17,9,9,9,9,-27,9,9,9,-34,-28,-29,-33,9,9,-30,]),'$end':([1,2,3,10,41,52,54,58,80,81,83,84,86,87,94,103,104,105,107,111,],[0,-1,-3,-2,-8,-11,-13,-37,-10,-12,-35,-36,-16,-17,-27,-34,-28,-29,-33,-30,]),'END':([3,10,41,52,54,58,80,81,83,84,86,87,93,94,95,97,103,104,105,107,109,111,],[-3,-2,-8,-11,-13,-37,-10,-12,-35,-36,-16,-17,98,-27,100,102,-34,-28,-29,-33,110,-30,]),'EQUAL':([4,12,13,39,],[11,26,28,66,]),'PLUS':([4,12,20,21,23,24,29,33,36,37,51,70,71,72,73,74,75,76,77,78,79,90,91,],[12,25,-6,42,-5,-7,-6,42,42,42,42,42,42,42,42,42,42,42,42,42,-4,42,42,]),'MINUS':([4,13,20,21,23,24,29,33,36,37,51,70,71,72,73,74,75,76,77,78,79,90,91,],[13,27,-6,43,-5,-7,-6,43,43,43,43,43,43,43,43,43,43,43,43,43,-4,43,43,]),'LPAREN':([4,5,6,7,8,11,14,15,16,17,19,22,42,43,44,45,46,47,48,49,50,60,65,66,],[14,15,16,17,18,22,22,22,22,22,40,22,22,22,22,22,22,22,22,22,22,22,22,22,]),'NUMBER':([11,14,15,16,17,22,26,28,42,43,44,45,46,47,48,49,50,60,65,66,],[23,23,23,23,23,23,53,55,23,23,23,23,23,23,23,23,23,23,23,23,]),'STRING':([11,14,15,16,17,22,42,43,44,45,46,47,48,49,50,60,65,66,],[24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,]),'RPAREN':([14,20,23,24,29,30,32,33,34,35,36,37,40,51,67,68,70,71,72,73,74,75,76,77,78,79,82,85,91,101,],[31,-6,-5,-7,-6,57,59,-15,61,62,63,64,69,79,-32,92,-18,-19,-20,-21,-22,-23,-24,-25,-26,-4,-31,-14,-9,106,]),'SEMICOLON':([20,21,23,24,25,27,31,38,53,55,57,59,61,62,70,71,72,73,74,75,76,77,78,79,90,91,98,100,102,110,],[-6,41,-5,-7,52,54,58,65,80,81,83,84,86,87,-18,-19,-20,-21,-22,-23,-24,-25,-26,-4,96,-9,103,105,107,111,]),'TIMES':([20,21,23,24,29,33,36,37,51,70,71,72,73,74,75,76,77,78,79,90,91,],[-6,44,-5,-7,-6,44,44,44,44,44,44,44,44,44,44,44,44,44,-4,44,44,]),'OR':([20,21,23,24,29,33,36,37,51,70,71,72,73,74,75,76,77,78,79,90,91,],[-6,45,-5,-7,-6,45,45,45,45,45,45,45,45,45,45,45,45,45,-4,45,45,]),'AND':([20,21,23,24,29,33,36,37,51,70,71,72,73,74,75,76,77,78,79,90,91,],[-6,46,-5,-7,-6,46,46,46,46,46,46,46,46,46,46,46,46,46,-4,46,46,]),'EQUALS':([20,21,23,24,29,33,36,37,51,70,71,72,73,74,75,76,77,78,79,90,91,],[-6,47,-5,-7,-6,47,47,47,47,47,47,47,47,47,47,47,47,47,-4,47,47,]),'LOWER':([20,21,23,24,29,33,36,37,51,70,71,72,73,74,75,76,77,78,79,90,91,],[-6,48,-5,-7,-6,48,48,48,48,48,48,48,48,48,48,48,48,48,-4,48,48,]),'HIGHER':([20,21,23,24,29,33,36,37,51,70,71,72,73,74,75,76,77,78,79,90,91,],[-6,49,-5,-7,-6,49,49,49,49,49,49,49,49,49,49,49,49,49,-4,49,49,]),'DIVIDE':([20,21,23,24,29,33,36,37,51,70,71,72,73,74,75,76,77,78,79,90,91,],[-6,50,-5,-7,-6,50,50,50,50,50,50,50,50,50,50,50,50,50,-4,50,50,]),'COMMA':([20,23,24,29,33,67,70,71,72,73,74,75,76,77,78,79,],[-6,-5,-7,56,60,56,-18,-19,-20,-21,-22,-23,-24,-25,-26,-4,]),'ELSE':([41,52,54,58,80,81,83,84,86,87,94,103,104,105,107,111,],[-8,-11,-13,-37,-10,-12,-35,-36,-16,-17,99,-34,-28,-29,-33,-30,]),'THEN':([63,],[88,]),'DO':([64,106,],[89,108,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'start':([0,],[1,]),'linst':([0,68,88,91,107,],[2,92,94,96,108,]),'inst':([0,2,68,87,88,91,92,94,96,98,107,108,],[3,10,3,93,3,3,10,10,10,103,3,10,]),'expression':([11,14,15,16,17,22,41,42,43,44,45,46,47,48,49,59,64,65,],[21,32,32,35,36,50,69,70,71,72,73,74,75,76,77,32,89,90,]),'expressions':([14,15,59,],[29,34,84,]),'params':([14,15,39,55,],[31,33,67,81,]),'assign':([18,95,],[37,100,]),}
+_lr_goto_items = {'start':([0,],[1,]),'linst':([0,69,89,92,108,],[2,93,95,97,109,]),'inst':([0,2,69,88,89,92,93,95,97,99,108,109,],[3,10,3,94,3,3,10,10,10,104,3,10,]),'expression':([11,14,15,16,17,22,42,43,44,45,46,47,48,49,50,60,65,66,],[21,33,33,36,37,51,70,71,72,73,74,75,76,77,78,33,90,91,]),'expressions':([14,15,60,],[30,35,85,]),'params':([14,15,40,56,],[32,34,68,82,]),'assign':([18,96,],[38,101,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,40 +27,41 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> start","S'",1,None,None,None),
-  ('start -> linst','start',1,'p_start','Projet.py',81),
-  ('linst -> linst inst','linst',2,'p_line','Projet.py',214),
-  ('linst -> inst','linst',1,'p_line','Projet.py',215),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','Projet.py',222),
-  ('expression -> NUMBER','expression',1,'p_expression_number','Projet.py',226),
-  ('expression -> NAME','expression',1,'p_expression_name','Projet.py',230),
-  ('inst -> NAME EQUAL expression SEMICOLON','inst',4,'p_statement_assign','Projet.py',235),
-  ('assign -> NAME EQUAL expression','assign',3,'p_assign','Projet.py',239),
-  ('inst -> NAME PLUS EQUAL NUMBER SEMICOLON','inst',5,'p_increment','Projet.py',245),
-  ('inst -> NAME PLUS PLUS SEMICOLON','inst',4,'p_increment','Projet.py',246),
-  ('inst -> NAME MINUS EQUAL NUMBER SEMICOLON','inst',5,'p_decrement','Projet.py',253),
-  ('inst -> NAME MINUS MINUS SEMICOLON','inst',4,'p_decrement','Projet.py',254),
-  ('expressions -> expression COMMA expressions','expressions',3,'p_expression_list','Projet.py',262),
-  ('expressions -> expression','expressions',1,'p_expression_list','Projet.py',263),
-  ('inst -> PRINT LPAREN params RPAREN SEMICOLON','inst',5,'p_statement_print','Projet.py',270),
-  ('inst -> PRINT LPAREN expressions RPAREN SEMICOLON','inst',5,'p_statement_print','Projet.py',271),
-  ('expression -> expression PLUS expression','expression',3,'p_comparison','Projet.py',275),
-  ('expression -> expression MINUS expression','expression',3,'p_comparison','Projet.py',276),
-  ('expression -> expression TIMES expression','expression',3,'p_comparison','Projet.py',277),
-  ('expression -> expression OR expression','expression',3,'p_comparison','Projet.py',278),
-  ('expression -> expression AND expression','expression',3,'p_comparison','Projet.py',279),
-  ('expression -> expression EQUALS expression','expression',3,'p_comparison','Projet.py',280),
-  ('expression -> expression LOWER expression','expression',3,'p_comparison','Projet.py',281),
-  ('expression -> expression HIGHER expression','expression',3,'p_comparison','Projet.py',282),
-  ('expression -> expression DIVIDE expression','expression',3,'p_comparison','Projet.py',283),
-  ('inst -> IF LPAREN expression RPAREN THEN inst','inst',6,'p_condition','Projet.py',287),
-  ('inst -> IF LPAREN expression RPAREN THEN inst ELSE inst','inst',8,'p_condition','Projet.py',288),
-  ('inst -> WHILE LPAREN expression RPAREN DO linst END SEMICOLON','inst',8,'p_while','Projet.py',295),
-  ('inst -> FOR LPAREN assign SEMICOLON expression SEMICOLON assign RPAREN DO linst END SEMICOLON','inst',12,'p_for','Projet.py',299),
-  ('params -> NAME COMMA params','params',3,'p_params','Projet.py',303),
-  ('params -> NAME','params',1,'p_params','Projet.py',304),
-  ('inst -> FUNCTION NAME LPAREN params RPAREN linst END SEMICOLON','inst',8,'p_funct','Projet.py',311),
-  ('inst -> FUNCTION NAME LPAREN RPAREN linst END SEMICOLON','inst',7,'p_funct','Projet.py',312),
-  ('inst -> NAME LPAREN expressions RPAREN SEMICOLON','inst',5,'p_call','Projet.py',319),
-  ('inst -> NAME LPAREN params RPAREN SEMICOLON','inst',5,'p_call','Projet.py',320),
-  ('inst -> NAME LPAREN RPAREN SEMICOLON','inst',4,'p_call','Projet.py',321),
+  ('start -> linst','start',1,'p_start','Projet.py',80),
+  ('linst -> linst inst','linst',2,'p_line','Projet.py',218),
+  ('linst -> inst','linst',1,'p_line','Projet.py',219),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','Projet.py',226),
+  ('expression -> NUMBER','expression',1,'p_expression_number','Projet.py',230),
+  ('expression -> NAME','expression',1,'p_expression_name','Projet.py',234),
+  ('expression -> STRING','expression',1,'p_expression_string','Projet.py',238),
+  ('inst -> NAME EQUAL expression SEMICOLON','inst',4,'p_statement_assign','Projet.py',243),
+  ('assign -> NAME EQUAL expression','assign',3,'p_assign','Projet.py',247),
+  ('inst -> NAME PLUS EQUAL NUMBER SEMICOLON','inst',5,'p_increment','Projet.py',253),
+  ('inst -> NAME PLUS PLUS SEMICOLON','inst',4,'p_increment','Projet.py',254),
+  ('inst -> NAME MINUS EQUAL NUMBER SEMICOLON','inst',5,'p_decrement','Projet.py',261),
+  ('inst -> NAME MINUS MINUS SEMICOLON','inst',4,'p_decrement','Projet.py',262),
+  ('expressions -> expression COMMA expressions','expressions',3,'p_expression_list','Projet.py',270),
+  ('expressions -> expression','expressions',1,'p_expression_list','Projet.py',271),
+  ('inst -> PRINT LPAREN params RPAREN SEMICOLON','inst',5,'p_statement_print','Projet.py',278),
+  ('inst -> PRINT LPAREN expressions RPAREN SEMICOLON','inst',5,'p_statement_print','Projet.py',279),
+  ('expression -> expression PLUS expression','expression',3,'p_comparison','Projet.py',283),
+  ('expression -> expression MINUS expression','expression',3,'p_comparison','Projet.py',284),
+  ('expression -> expression TIMES expression','expression',3,'p_comparison','Projet.py',285),
+  ('expression -> expression OR expression','expression',3,'p_comparison','Projet.py',286),
+  ('expression -> expression AND expression','expression',3,'p_comparison','Projet.py',287),
+  ('expression -> expression EQUALS expression','expression',3,'p_comparison','Projet.py',288),
+  ('expression -> expression LOWER expression','expression',3,'p_comparison','Projet.py',289),
+  ('expression -> expression HIGHER expression','expression',3,'p_comparison','Projet.py',290),
+  ('expression -> expression DIVIDE expression','expression',3,'p_comparison','Projet.py',291),
+  ('inst -> IF LPAREN expression RPAREN THEN inst','inst',6,'p_condition','Projet.py',295),
+  ('inst -> IF LPAREN expression RPAREN THEN inst ELSE inst','inst',8,'p_condition','Projet.py',296),
+  ('inst -> WHILE LPAREN expression RPAREN DO linst END SEMICOLON','inst',8,'p_while','Projet.py',303),
+  ('inst -> FOR LPAREN assign SEMICOLON expression SEMICOLON assign RPAREN DO linst END SEMICOLON','inst',12,'p_for','Projet.py',307),
+  ('params -> NAME COMMA params','params',3,'p_params','Projet.py',311),
+  ('params -> NAME','params',1,'p_params','Projet.py',312),
+  ('inst -> FUNCTION NAME LPAREN params RPAREN linst END SEMICOLON','inst',8,'p_funct','Projet.py',319),
+  ('inst -> FUNCTION NAME LPAREN RPAREN linst END SEMICOLON','inst',7,'p_funct','Projet.py',320),
+  ('inst -> NAME LPAREN expressions RPAREN SEMICOLON','inst',5,'p_call','Projet.py',327),
+  ('inst -> NAME LPAREN params RPAREN SEMICOLON','inst',5,'p_call','Projet.py',328),
+  ('inst -> NAME LPAREN RPAREN SEMICOLON','inst',4,'p_call','Projet.py',329),
 ]
