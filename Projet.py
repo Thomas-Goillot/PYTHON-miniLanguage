@@ -113,7 +113,6 @@ def evalInst(t):
         while evalExpr(forCondition):
             evalInst(instructions)
             evalInst(forInst)
-
     if value == 'function':
         name, params, instructions = t[1], t[2], t[3]
         if name in functions.keys():
@@ -121,7 +120,6 @@ def evalInst(t):
             return
         else:
             functions[name] = (params, instructions)
-
     if value == 'call':
         name, params = t[1], t[2]
 
@@ -140,7 +138,6 @@ def evalInst(t):
         evalInst(instructions)
         for i in range(len(params)):
             del variables[paramsFunction[i]]
-
     if value == 'print':
         # handle multiple params
         if type(t[1]) == list:
@@ -152,10 +149,12 @@ def evalInst(t):
         variables[t[1]] = evalExpr(t[2])
     if value == 'bloc':
         evalInst(t[1])
-
         evalInst(t[2])
-
-
+    if value == 'increment':
+        variables[t[1]] += t[2]
+    if value == 'decrement':
+        variables[t[1]] -= t[2]
+    
 def evalExpr(t):
     # print('\t\tevalExpr', t)
     if type(t) == int:
@@ -202,6 +201,11 @@ def evalExpr(t):
         return evalExpr(t[2])
     if t[0] == 'bloc':
         return evalExpr(t[2])
+    if t[0] == 'increment':
+        return evalExpr(t[2])
+    if t[0] == 'decrement':
+        return evalExpr(t[2])
+    
 
     return 0
 
@@ -214,16 +218,13 @@ def p_line(t):
     else:
         t[0] = ('bloc', t[1], 'empty')
 
-
 def p_expression_group(t):
     'expression : LPAREN expression RPAREN'
     t[0] = t[2]
 
-
 def p_expression_number(t):
     'expression : NUMBER'
     t[0] = t[1]
-
 
 def p_expression_name(t):
     'expression : NAME'
@@ -234,12 +235,27 @@ def p_statement_assign(t):
     'inst : NAME EQUAL expression SEMICOLON'
     t[0] = ('assign', t[1], t[3])
 
-
 def p_assign(t):
     '''assign : NAME EQUAL expression'''
     t[0] = ('assign', t[1], t[3])
 
-# make a list of expressions for print
+
+# handle being incremented like x+=1 or x++
+def p_increment(t):
+    '''inst : NAME PLUS EQUAL NUMBER SEMICOLON
+            | NAME PLUS PLUS SEMICOLON'''
+    if len(t) == 6:
+        t[0] = ('increment', t[1], t[4])
+    else:
+        t[0] = ('increment', t[1], 1)
+ 
+def p_decrement(t):
+    '''inst : NAME MINUS EQUAL NUMBER SEMICOLON
+            | NAME MINUS MINUS SEMICOLON'''
+    if len(t) == 6:
+        t[0] = ('decrement', t[1], t[4])
+    else:
+        t[0] = ('decrement', t[1], 1)
 
 
 def p_expression_list(t):
@@ -250,12 +266,10 @@ def p_expression_list(t):
     else:
         t[0] = [t[1]]+t[3]
 
-
 def p_statement_print(t):
     '''inst : PRINT LPAREN params RPAREN SEMICOLON
             | PRINT LPAREN expressions RPAREN SEMICOLON'''
     t[0] = ('print', t[3])
-
 
 def p_comparison(t):
     '''expression : expression PLUS expression
@@ -269,7 +283,6 @@ def p_comparison(t):
                   | expression DIVIDE expression'''
     t[0] = (t[2], t[1], t[3])
 
-
 def p_condition(t):
     '''inst : IF LPAREN expression RPAREN THEN inst 
             | IF LPAREN expression RPAREN THEN inst ELSE inst'''
@@ -278,16 +291,13 @@ def p_condition(t):
     else:
         t[0] = ('if', t[3], t[6], t[8])
 
-
 def p_while(t):
     '''inst : WHILE LPAREN expression RPAREN DO linst END SEMICOLON'''
     t[0] = ('while', t[3], t[6])
 
-
 def p_for(t):
     '''inst : FOR LPAREN assign SEMICOLON expression SEMICOLON assign RPAREN DO linst END SEMICOLON'''
     t[0] = ('for', t[3], t[5], t[7], t[10])
-
 
 def p_params(t):
     '''params : NAME COMMA params
@@ -297,7 +307,6 @@ def p_params(t):
     else:
         t[0] = [t[1]]+t[3]
 
-
 def p_funct(t):
     '''inst : FUNCTION NAME LPAREN params RPAREN linst END SEMICOLON
             | FUNCTION NAME LPAREN RPAREN linst END SEMICOLON'''
@@ -305,7 +314,6 @@ def p_funct(t):
     params = t[4] if len(t) == 9 else []
     instructions = t[6] if len(t) == 9 else t[5]
     t[0] = ('function', name, params, instructions)
-
 
 def p_call(t):
     '''inst : NAME LPAREN expressions RPAREN SEMICOLON
@@ -315,27 +323,13 @@ def p_call(t):
     params = t[3] if len(t) == 6 else []
     t[0] = ('call', name, params)
 
-
 def p_error(t):
     print("\t\tSyntax error at '%s'" % t.value)
 
 
 parser = yacc.yacc()
-
-s_prints = 'print(1+2);x=4;print(x);x=x+1;print(x);'
-
-s = 'x=1;while (x<10) do print(x);x=x+1; end;'
-s = 'x=1;if (x>2) then print(x);else print(0);'
-s = 'quiaecritca=1; for (test=1; test<10; test=test+1) do print(test); end; print(quiaecritca);'
-s_func_no_params = 'function functTest() print(1); end; functTest();'
-s = "print(1+2, 3+4);"
-s = 'x=3;y=12; function functTest(parametre, parachute) print(parametre); print(parachute); end; functTest(x+1,y);'
-s = 'print("test");'
-# with open("1.in") as file: # Use file to refer to the file object
-
-# s = file.read()
-
-s = open("prog.wist",'r').read()
+s = open("prog.with",'r').read()
 parser.parse(s)
+
 
 # interpreter parametres fonctions et 2 petits bonus pour jeudi
