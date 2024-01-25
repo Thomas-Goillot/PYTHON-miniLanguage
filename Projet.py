@@ -58,7 +58,6 @@ def t_NUMBER(t):
 
 def t_STRING(t):
     r'\"([^\\\n]|(\\.))*?\"'
-    t.value = t.value[1:-1]
     return t
 
 def t_newline(t):
@@ -137,18 +136,14 @@ def evalInst(t):
         evalInst(instructions)
         for i in range(len(params)):
             del variables[paramsFunction[i]]
-    if t[0] == 'print':
-        if type(t[1]) == list:
-            for param in t[1]:
-                if type(param) == str:  # Check if it's a string
-                    print('CONSOLE>', param)
-                else:
-                    print('CONSOLE>', evalExpr(param))
-        else:
-            if type(t[1]) == str:  # Check if it's a string
-                print('CONSOLE>', t[1])
+    if value == 'print':
+        for param in t[1]:
+            # Check if the param is a real string or a string that is a variable
+            if type(param) == str and param[0] == '"':
+                print('CONSOLE>', param[1:-1], '\n', end='')
             else:
-                print('CONSOLE>', evalExpr(t[1]))
+                print('CONSOLE>', evalExpr(param), '\n', end='')
+
     if value == 'assign':
         variables[t[1]] = evalExpr(t[2])
     if value == 'bloc':
@@ -158,7 +153,7 @@ def evalInst(t):
         variables[t[1]] += t[2]
     if value == 'decrement':
         variables[t[1]] -= t[2]
-    
+
 def evalExpr(t):
     # print('\t\tevalExpr', t)
     if type(t) == int:
